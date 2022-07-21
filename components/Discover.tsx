@@ -15,7 +15,7 @@ const Discover = () => {
     "hover:text-white hover:bg-primary xl:border-2 xl;border-gray-300 px-3 py-2 rounded xl:rounded-full flex items-center justify-center cursor-pointer text-black";
   return (
     <div className="xl:border-b-2 xl:border-gray-200 pb-6 ">
-      <p className="text-gray-500 font-semibold m-3 mt-4 hidden xl:block">
+      <p className="text-gray-500  font-semibold m-3 mt-4 hidden xl:block">
         Popular Topics
       </p>
       <div className="flex gap-3 flex-wrap">
