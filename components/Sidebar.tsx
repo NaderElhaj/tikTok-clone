@@ -40,7 +40,7 @@ const Sidebar = () => {
                 <p className="text-gray-400">Log in to like and comment</p>
                 <div className="pr-4">
                   <GoogleLogin
-                    clientId=""
+                    clientId=''
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
