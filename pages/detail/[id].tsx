@@ -11,6 +11,8 @@ import axios from "axios";
 import { BASE_URL } from "../../utils";
 import { Video } from "../../types";
 import useAuthStore from "../../store/authStore";
+import LikeButton from "../../components/LikeButton";
+import Comments from "../../components/Comments";
 
 interface IProps {
   postDetails: Video;
@@ -25,7 +27,7 @@ const Detail = ({ postDetails }: IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const router = useRouter()
-  const userProfile = useAuthStore()
+  const {userProfile} :any = useAuthStore()
 
   useEffect(()=> {
     if(post && videoRef?.current){
@@ -42,6 +44,17 @@ const Detail = ({ postDetails }: IProps) => {
       setIsPlaying(true)
     }
   };
+
+  const handleLike = async (like:boolean)=>{
+    if(userProfile ){
+      const {data} = await axios.put(`${BASE_URL}/api/like`,{
+        userId: userProfile._id,
+        postId:post._id,
+        like
+      })
+      setPost({...post,likes:data.likes})
+    }
+  }
 
   if (!post) return null;
   return (
@@ -119,7 +132,7 @@ const Detail = ({ postDetails }: IProps) => {
         <p className="px-10 text-lg text-gray-600">{post.caption}</p>
         <div className="mt-10 px-10">
             {userProfile && (
-              <LikeButton />
+              <LikeButton handleLike={()=>handleLike(true)} handleDislike={()=>handleLike(false)}  likes={post.likes}  />
             )}
         </div>
 
